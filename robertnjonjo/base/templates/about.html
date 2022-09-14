@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+{% load static%}
+<body>
+  {% block content%}
+  <!-- about section -->
+
+  <section class="about_section layout_padding background-color">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          About
+        </h2>
+      </div>
+      <div class="box layout_padding2-top layout_padding-bottom">
+        <div class="detail-box">
+          <p>
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout. The
+            point of using LoremIt is a long established fact that a reader
+            will be distracted by the readable content of a page when looking
+            at its layout. The point of using Lorem
+          </p>
+        </div>
+        <div class="img-box">
+          <img src="{% static 'images/about-img.jpg'%}">
+        </div>
+      </div>
+    </div>
+    <div class="btn-box">
+      <a href="">
+        Read More
+      </a>
+    </div>
+    <div class="btn-box">
+      <a href="{% static 'resume.pdf'%}">
+        Download My Resume 
+      </a>
+    </div>
+  </section>
+
+  <!-- end about section -->
+  {% endblock %}
+  <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
+  <script src="{% static 'js/bootstrap.js'%}"></script>
+
+  <script>
+    function openNav() {
+      document.getElementById("myNav").style.width = "100%";
+    }
+
+    function closeNav() {
+      document.getElementById("myNav").style.width = "0%";
+    }
+  </script>
+
+</body>
+
+</html>

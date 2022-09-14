@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+{% load static %}
+
+<!-- project section -->
+{% block content%}
+<section class="project_section layout_padding-bottom background-color">
+  <div class="container">
+    <div class="main-container back_light">
+      <h1>My Projects</h1>
+      {% if request.user.is_staff %}
+        <a class="btn btn-warning" href="{% url 'create_project' %}">Create Project</a>
+      {% endif %}
+    </div>
+    <div class="main-container layout_padding2-top">
+      <div class="post-wrapper">
+
+        {% for projects in projects %}
+        <div>
+          <div class="post">
+            <img class="thumbnail" src="{{post.thumbnail.url}}">
+            <div class="post-preview">
+              <h6 class="post-title">{{projects.title}}</h6>
+              <p class="post-intro">{{projects.sub_headline}}</p>
+              <a href="{% url 'detail' projects.slug %}">Read More</a>
+    
+              {% if request.user.is_staff %}
+                | <a href="{% url 'update_project' projects.slug %}">Edit</a>
+                | <a href="{% url 'delete_project' projects.slug %}">Delete</a>
+              {% endif %} 
+              <hr>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+          <h3>No Projects found...</h3>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- end project section -->
+{% endblock%}
+  <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
+  <script src="{% static 'js/bootstrap.js'%}"></script>
+
+  <script>
+    function openNav() {
+      document.getElementById("myNav").style.width = "100%";
+    }
+
+    function closeNav() {
+      document.getElementById("myNav").style.width = "0%";
+    }
+  </script>
+
+</body>
+
+</html>

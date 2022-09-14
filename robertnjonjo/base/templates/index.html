@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+  <head>
+    <!-- Basic -->
+    <meta charset="utf-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    >
+    <!-- Site Metas -->
+    <meta name="keywords" content="">
+    <meta name="description" content="" >
+    <meta name="author" content="" >
+
+    <title>{% block title %}Robert Kamau Njonjo{% endblock %}</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css">
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    <!-- fonts style -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700|Roboto:400,700&display=swap">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" >
+    <!-- responsive style -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css'%}" >
+
+  </head>
+
+  <body>
+    {% include 'includes/navbar.html' %}
+    {% include 'includes/slider.html'%}
+    {% include 'includes/design.html'%}
+    <div>
+      <hr class="section_hr" />
+    </div>
+    {% include 'includes/about.html'%}
+    <div class="main-container layout_padding2-top">
+      <div class="post-wrapper">
+
+        {% for projects in projects %}
+        <div>
+          <div class="post">
+            <img class="thumbnail" src="{{post.thumbnail.url}}">
+            <div class="post-preview">
+              <h6 class="post-title">{{projects.title}}</h6>
+              <p class="post-intro">{{projects.sub_headline}}</p>
+              <a href="{% url 'detail' projects.slug %}">Read More</a>
+    
+              {% if request.user.is_staff %}
+                | <a href="{% url 'update_project' projects.slug %}">Edit</a>
+                | <a href="{% url 'delete_project' projects.slug %}">Delete</a>
+              {% endif %} 
+              <hr>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+    {% include 'includes/expand.html'%}
+    <div>
+      <hr class="section_hr" />
+    </div>
+        <!-- blog section -->
+    <section class="s1">
+      <div class="main-container">
+        <h3 style="text-align: center;">See My Blog Space</h3>
+        <div class="main-container layout_padding2-top">
+          <div class="post-wrapper">
+          {% for posts in posts %}
+          <div>
+            <div class="post">
+              <img class="thumbnail" src="{{posts.thumbnail.url}}">
+              <div class="post-preview">
+                <h6 class="post-title">{{posts.headline}}</h6>
+                <p class="post-intro">{{posts.sub_headline}}</p>
+                <a href="{%  url 'blogs' posts.slug %}">Read More</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+  
+        <p align="center">
+          <a href="{% url 'blog' %}">View More</a>
+        </p>
+      </div>
+    </section>
+    {% include 'includes/contact.html'%}
+    {% include 'includes/footer.html'%}
+
+    <script  src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
+    <script  src="{% static 'js/bootstrap.js'%}"></script>
+
+    <script>
+      function openNav() {
+        document.getElementById("myNav").style.width = "100%";
+      }
+
+      function closeNav() {
+        document.getElementById("myNav").style.width = "0%";
+      }
+    </script>
+  </body>
+</html>
